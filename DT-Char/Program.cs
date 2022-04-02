@@ -84,13 +84,13 @@ class Program
 
     static string Logic(string str) 
     {
+      bool rus = true;
+      bool eng = true;
+      bool num = true;
+      
+      StringBuilder sb = new StringBuilder();
+      
       foreach(char c in str) {
-      
-        bool rus = true;
-        bool eng = true;
-        bool num = true;
-      
-        StringBuilder sb = new StringBuilder();
         
         if (rus && isRusChar(c)) {
           sb.Append(c);
@@ -107,33 +107,33 @@ class Program
           sb.Append(c);
             continue;
         }
-      }
+      } 
       return sb.ToString();
     }
-    
+
     static void Main()
     {
-        HashSet<String> whiteList = new HashSet<String>();
-        HashSet<String> blackList = new HashSet<String>();
-        String symbol, low, black;
-      
-        Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры)");
-        symbol = Console.ReadLine();
-      
-        Console.WriteLine("Добавить символ\\слово(а) в BlackList?: Да\\Нет");
-        black = Console.ReadLine();
+      HashSet<String> whiteList = new HashSet<String>();
+      HashSet<String> blackList = new HashSet<String>();
+      String symbol, low, black;
+    
+      Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры)");
+      symbol = Console.ReadLine();
+    
+      Console.WriteLine("Добавить символ\\слово(а) в BlackList?: Да\\Нет");
+      black = Console.ReadLine();
 
-        if (black == "Да") {
-          Console.WriteLine("Введите символ\\слово(а):");
-          foreach(var elem in Console.ReadLine().Split(' ', ','))
-            blackList.Add(elem); 
-        }
-        
-        Console.WriteLine("Перевести в нижний регистр?: Да\\Нет");
-        low = Console.ReadLine();
+      if (black == "Да") {
+        Console.WriteLine("Введите символ\\слово(а):");
+        foreach(var elem in Console.ReadLine().Split(' ', ','))
+          blackList.Add(elem); 
+      }
+      
+      Console.WriteLine("Перевести в нижний регистр?: Да\\Нет");
+      low = Console.ReadLine();
 
-        Console.WriteLine("Введите строку:");
-        string Str = Console.ReadLine();
-        Console.WriteLine(Logic(Str));
+      Console.WriteLine("Введите строку:");
+      string str = Console.ReadLine();
+      Console.WriteLine(Logic(str));
     }
 }
