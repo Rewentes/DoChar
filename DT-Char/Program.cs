@@ -54,15 +54,18 @@ class Program
     return false;
     }
 
-    static string toLow(string low, string Str)
+    static char toLow(string low, char Ch)
     {
-        if (low == "Да") return Str.ToLower();
-        if (low == "Нет") return Str;
-
-        return "0";
+      if ((low == "Да") && ((int)Ch >= 65 && (int)Ch <= 90) || ((int)Ch >= 1040 && (int)Ch <= 1071)) 
+      {
+        return (char) ((int) Ch + 32);
+      }
+      else if (low == "Нет") return Ch;
+      
+      return '0';
     }
 
-    static string Logic(string str, string symbol) 
+    static string Logic(string str, string symbol, string low) 
     {
       bool rus = true;
       bool eng = true;
@@ -87,17 +90,17 @@ class Program
       foreach(char c in str) {
         
         if (rus && isRusChar(c)) {
-          sb.Append(c);
+          sb.Append(toLow(low, c));
             continue;
         }
         
         if (eng && isEngChar(c)) {
-          sb.Append(c);
+          sb.Append(toLow(low, c));
             continue;
         }
         
         if (num && isNumChar(c)) {
-          sb.Append(c);
+          sb.Append(toLow(low, c));
             continue;
         }
       } 
@@ -127,6 +130,6 @@ class Program
 
       Console.WriteLine("Введите строку:");
       String str = Console.ReadLine();
-      Console.WriteLine(Logic(str, symbol));
+      Console.WriteLine(Logic(str, symbol, low));
     }
 }
