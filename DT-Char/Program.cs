@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-
 class Program
 {
     static bool isRusChar(char Ch)
     {
-        if (!((int)Ch >= 1040 && (int)Ch <= 1105 || (int)Ch == 1025))
+        if ((int)Ch >= 1040 && (int)Ch <= 1105 || (int)Ch == 1025)
         {
           return true;
         }
@@ -16,7 +15,7 @@ class Program
 
     static bool isEngChar(char Ch)
     {
-      if (!((int)Ch >= 65 && (int)Ch <= 90 || (int)Ch >= 97 && (int)Ch <= 122))
+      if ((int)Ch >= 65 && (int)Ch <= 90 || (int)Ch >= 97 && (int)Ch <= 122)
       {
         return true;
       }
@@ -25,7 +24,7 @@ class Program
 
     static bool isNumChar(char Ch)
     {
-      if (!((int)Ch >= 48 && (int)Ch <= 57))
+      if ((int)Ch >= 48 && (int)Ch <= 57)
       {
         return true;
       }
@@ -55,25 +54,6 @@ class Program
     return false;
     }
 
-    static void Elems(string symbol, bool rus, bool eng, bool num)
-    {
-        if (symbol == "Русский") {
-          rus = true;
-          eng = false;
-          num = false;
-        }
-        if (symbol == "Английский") {
-          rus = false;
-          eng = true;
-          num = false; 
-        }
-        if (symbol == "Цифры") {
-          rus = false;
-          eng = false;
-          num = true;     
-        }
-    }
-
     static string toLow(string low, string Str)
     {
         if (low == "Да") return Str.ToLower();
@@ -82,27 +62,40 @@ class Program
         return "0";
     }
 
-    static string Logic(string str) 
+    static string Logic(string str, string symbol) 
     {
       bool rus = true;
       bool eng = true;
       bool num = true;
+      if (symbol == "Русский") {
+        rus = true;
+        eng = false;
+        num = false;
+      }
+      if (symbol == "Английский") {
+        rus = false;
+        eng = true;
+        num = false; 
+      }
+      if (symbol == "Цифры") {
+        rus = false;
+        eng = false;
+        num = true;     
+      }
       
       StringBuilder sb = new StringBuilder();
-      
       foreach(char c in str) {
         
         if (rus && isRusChar(c)) {
           sb.Append(c);
             continue;
         }
-      
-      
+        
         if (eng && isEngChar(c)) {
           sb.Append(c);
             continue;
         }
-      
+        
         if (num && isNumChar(c)) {
           sb.Append(c);
             continue;
@@ -133,7 +126,7 @@ class Program
       low = Console.ReadLine();
 
       Console.WriteLine("Введите строку:");
-      string str = Console.ReadLine();
-      Console.WriteLine(Logic(str));
+      String str = Console.ReadLine();
+      Console.WriteLine(Logic(str, symbol));
     }
 }
