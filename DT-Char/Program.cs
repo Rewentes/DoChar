@@ -35,7 +35,7 @@ class Program
     {
       if (((int)Ch >= 48 && (int)Ch <= 57) ||
             ((int)Ch >= 65 && (int)Ch <= 90 || (int)Ch >= 97 && (int)Ch <= 122) ||
-            ((int)Ch >= 1040 && (int)Ch <= 1105 || (int)Ch == 1025 || (int)Ch ==1105))
+            ((int)Ch >= 1040 && (int)Ch <= 1105 || (int)Ch == 1025 || (int)Ch == 1105))
       {
         return true;
       }
@@ -85,10 +85,12 @@ class Program
         {
           return (char) ((int) Ch + 32);
         }
-        if ((int)Ch == 1025)
+
+        if ((int) Ch == 1025)
         {
           return (char) ((int) Ch + 80);
         }
+        else return Ch;
       }
       
       else if (low == "Нет") return Ch;
@@ -98,9 +100,11 @@ class Program
 
     static string Logic(string str, string symbol, string low, HashSet<char> blackList, HashSet<char> whiteList) 
     {
+      
       bool rus = true;
       bool eng = true;
       bool num = true;
+      
       if (symbol == "Русский") {
         rus = true;
         eng = false;
@@ -127,13 +131,13 @@ class Program
             continue;
         }
         
-        if (isWhiteListChar(c, whiteList) || (eng && isRusChar(c) && isBlackListChar(c, blackList))) 
+        if (isWhiteListChar(c, whiteList) || (eng && isEngChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
             continue;
         }
         
-        if (isWhiteListChar(c, whiteList) || (num && isRusChar(c) && isBlackListChar(c, blackList))) 
+        if (isWhiteListChar(c, whiteList) || (num && isNumChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
             continue;
@@ -145,8 +149,8 @@ class Program
     static void Main()
     {
       String str, symbol, low, black, white;
-      HashSet<char> blackList = new HashSet<char>();
-      HashSet<char> whiteList = new HashSet<char>();
+      HashSet<char> blackList = new HashSet<char>(); 
+      HashSet<char> whiteList = new HashSet<char>(); whiteList.Add(' ');
     
       Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры, Все[Enter для выбора])");
       symbol = Console.ReadLine();
