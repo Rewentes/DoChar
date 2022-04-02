@@ -127,22 +127,16 @@ class Program
             continue;
         }
         
-        if (isWhiteListChar(c, whiteList) || (rus && isRusChar(c) && isBlackListChar(c, blackList))) 
+        if (isWhiteListChar(c, whiteList) || (eng && isRusChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
             continue;
         }
         
-        if (isWhiteListChar(c, whiteList) || (rus && isRusChar(c) && isBlackListChar(c, blackList))) 
+        if (isWhiteListChar(c, whiteList) || (num && isRusChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
             continue;
-        }
-
-        else if (isWhiteListChar(c, whiteList) || (isRusChar(c) && isBlackListChar(c, blackList))) 
-        {
-          sb.Append(toLow(low, c));
-          continue;
         }
       } 
       return sb.ToString();
@@ -154,7 +148,7 @@ class Program
       HashSet<char> blackList = new HashSet<char>();
       HashSet<char> whiteList = new HashSet<char>();
     
-      Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры)");
+      Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры, Все[Enter для выбора])");
       symbol = Console.ReadLine();
     
       Console.WriteLine("Добавить символ\\слово(а) в whiteList?: Да\\Нет");
