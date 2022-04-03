@@ -98,12 +98,23 @@ class Program
       return '0';
     }
 
+    static bool DelSpase(char Ch, spa)
+    {
+      if (Ch == ' ')
+      {
+        return false;
+      }
+      else return true;
+      
+    }
+
     static string Logic(string str, string symbol, string low, HashSet<char> blackList, HashSet<char> whiteList) 
     {
       
       bool rus = true;
       bool eng = true;
       bool num = true;
+      bool spa = true;
       
       if (symbol == "Русский") {
         rus = true;
@@ -177,3 +188,5 @@ class Program
       Console.WriteLine(Logic(str, symbol, low, blackList, whiteList));
     }
 }
+
+
