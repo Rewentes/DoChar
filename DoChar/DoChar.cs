@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-class Program
+class DoChar
 {
   static bool isRusChar(char Ch)
     {
@@ -25,17 +25,6 @@ class Program
     static bool isNumChar(char Ch)
     {
       if ((int)Ch >= 48 && (int)Ch <= 57)
-      {
-        return true;
-      }
-    return false;
-    }
-  
-    static bool isAllChar(char Ch)
-    {
-      if (((int)Ch >= 48 && (int)Ch <= 57) ||
-            ((int)Ch >= 65 && (int)Ch <= 90 || (int)Ch >= 97 && (int)Ch <= 122) ||
-            ((int)Ch >= 1040 && (int)Ch <= 1105 || (int)Ch == 1025 || (int)Ch == 1105))
       {
         return true;
       }
