@@ -98,23 +98,13 @@ class Program
       return '0';
     }
 
-    static bool DelSpase(char Ch, spa)
-    {
-      if (Ch == ' ')
-      {
-        return false;
-      }
-      else return true;
-      
-    }
-
     static string Logic(string str, string symbol, string low, HashSet<char> blackList, HashSet<char> whiteList) 
     {
       
       bool rus = true;
       bool eng = true;
       bool num = true;
-      bool spa = true;
+      bool flagSpase = true;
       
       if (symbol == "Русский") {
         rus = true;
@@ -139,19 +129,28 @@ class Program
         if (isWhiteListChar(c, whiteList) || (rus && isRusChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
+          flagSpase = true;
             continue;
         }
         
         if (isWhiteListChar(c, whiteList) || (eng && isEngChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
+          flagSpase = true;
             continue;
         }
         
         if (isWhiteListChar(c, whiteList) || (num && isNumChar(c) && isBlackListChar(c, blackList))) 
         {
           sb.Append(toLow(low, c));
+          flagSpase = true;
             continue;
+        }
+
+        if (c == ' ' && flagSpase == true)
+        {
+          sb.Append(c);
+          flagSpase = false;
         }
       } 
       return sb.ToString();
@@ -161,7 +160,7 @@ class Program
     {
       String str, symbol, low, black, white;
       HashSet<char> blackList = new HashSet<char>(); 
-      HashSet<char> whiteList = new HashSet<char>(); whiteList.Add(' ');
+      HashSet<char> whiteList = new HashSet<char>();
     
       Console.WriteLine("Какие символы оставить?: (Русский, Английский, Цифры, Все[Enter для выбора])");
       symbol = Console.ReadLine();
@@ -173,7 +172,7 @@ class Program
 
       if (white == "Да") {
         Console.WriteLine("Введите символ\\слово(а) в whiteList:");
-        whiteList = addBlackList(Console.ReadLine(), whiteList);
+        whiteList = addWhiteList(Console.ReadLine(), whiteList);
       }
       if (black == "Да") {
         Console.WriteLine("Введите символ\\слово(а) в BlackList:");
@@ -188,5 +187,3 @@ class Program
       Console.WriteLine(Logic(str, symbol, low, blackList, whiteList));
     }
 }
-
-
